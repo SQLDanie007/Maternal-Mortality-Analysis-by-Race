@@ -1,0 +1,22 @@
+
+CREATE TABLE MaternalMortality (
+    Race VARCHAR(50),
+    Number_of_Deaths INT,
+    Total_Births INT,
+    Death_Rate_per_1000 FLOAT
+);
+
+INSERT INTO MaternalMortality (Race, Number_of_Deaths, Total_Births, Death_Rate_per_1000) VALUES
+('African American', 120, 1000, 120.0),
+('Caucasian', 50, 1200, 41.67),
+('Hispanic', 40, 1100, 36.36),
+('Asian', 30, 800, 37.5),
+('Other', 20, 600, 33.33);
+
+-- Query to find races with higher maternal death rates compared to the average
+SELECT Race, Death_Rate_per_1000
+FROM MaternalMortality
+WHERE Death_Rate_per_1000 > (
+    SELECT AVG(Death_Rate_per_1000) FROM MaternalMortality
+)
+ORDER BY Death_Rate_per_1000 DESC;
